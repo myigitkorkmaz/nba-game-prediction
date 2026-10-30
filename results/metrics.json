@@ -1,0 +1,107 @@
+{
+  "train_games": 9421,
+  "test_games": 5050,
+  "features": [
+    "DIFF_ELO",
+    "DIFF_SEASON_WIN_PCT",
+    "DIFF_SEASON_NET_RTG",
+    "DIFF_L10_WIN_PCT",
+    "DIFF_L10_MARGIN",
+    "DIFF_L10_ORTG",
+    "DIFF_L10_DRTG",
+    "DIFF_L10_NET_RTG",
+    "DIFF_L10_PACE",
+    "DIFF_L10_EFG",
+    "DIFF_L10_TOV_PCT",
+    "DIFF_L10_OREB_PCT",
+    "DIFF_L10_FT_RATE",
+    "DIFF_L10_OPP_EFG",
+    "DIFF_L10_DREB_PCT",
+    "DIFF_REST_DAYS",
+    "DIFF_GAMES_LAST_7D",
+    "HOME_BACK_TO_BACK",
+    "AWAY_BACK_TO_BACK"
+  ],
+  "best_lr": {
+    "C": 0.01
+  },
+  "best_rf": {
+    "max_depth": 4,
+    "min_samples_leaf": 20,
+    "max_features": 0.5
+  },
+  "train_accuracy": {
+    "Logistic regression": 0.6744506952552808,
+    "Random forest": 0.6820931960513746
+  },
+  "test": {
+    "Baseline: home team always wins": {
+      "accuracy": 0.5518811881188119,
+      "acc_ci_low": 0.5381651158246369,
+      "acc_ci_high": 0.565597260412987,
+      "n": 5050
+    },
+    "Baseline: better record wins": {
+      "accuracy": 0.6283168316831683,
+      "acc_ci_low": 0.6149881812944754,
+      "acc_ci_high": 0.6416454820718612,
+      "n": 5050
+    },
+    "Baseline: Elo favorite wins": {
+      "accuracy": 0.6392079207920792,
+      "acc_ci_low": 0.6259626770857936,
+      "acc_ci_high": 0.6524531644983649,
+      "n": 5050,
+      "log_loss": 0.6398782175290164,
+      "brier": 0.22398584402997468,
+      "auc": 0.6941582668474822
+    },
+    "Logistic regression": {
+      "accuracy": 0.6473267326732673,
+      "acc_ci_low": 0.6341484619767644,
+      "acc_ci_high": 0.6605050033697702,
+      "n": 5050,
+      "log_loss": 0.6269169216797696,
+      "brier": 0.21851318688069105,
+      "auc": 0.7005773443744321
+    },
+    "Random forest": {
+      "accuracy": 0.6483168316831683,
+      "acc_ci_low": 0.6351470121924949,
+      "acc_ci_high": 0.6614866511738418,
+      "n": 5050,
+      "log_loss": 0.6322418527007022,
+      "brier": 0.22075248462634312,
+      "auc": 0.6952675138865965
+    }
+  },
+  "ablation": {
+    "Elo difference only": {
+      "accuracy": 0.641980198019802,
+      "acc_ci_low": 0.6287573586403312,
+      "acc_ci_high": 0.6552030373992728,
+      "n": 5050,
+      "log_loss": 0.6310541068768559,
+      "brier": 0.22039327806288275,
+      "auc": 0.6951072153221961
+    },
+    "Box-score form only (no Elo, no record)": {
+      "accuracy": 0.6225742574257426,
+      "acc_ci_low": 0.6092045556190326,
+      "acc_ci_high": 0.6359439592324525,
+      "n": 5050,
+      "log_loss": 0.6457493806413583,
+      "brier": 0.2271562123669107,
+      "auc": 0.6681505779072427
+    },
+    "All 19 features": {
+      "accuracy": 0.6473267326732673,
+      "acc_ci_low": 0.6341484619767644,
+      "acc_ci_high": 0.6605050033697702,
+      "n": 5050,
+      "log_loss": 0.6269169216797696,
+      "brier": 0.21851318688069105,
+      "auc": 0.7005773443744321
+    }
+  }
+}
