@@ -13,6 +13,8 @@ I wanted to make clear that I used CLAUDE(OPUS 5.5) for the coding part of this 
     *Using 2010–2024 data instead of the proposal’s 2004–2020 Kaggle set so the test seasons include the most recent NBA.
     *Three baselines.The models have to beat more than just the easiest guess (home is favorite %55).
     *Using FiveThirtyEight’s elo method as training/testing data.
+
+Please let me know if you think certain part of this code needs to be hardcodede by myself so I can fix it before other report. Thank you!
     
 
 ## Data
