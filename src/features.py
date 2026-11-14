@@ -18,7 +18,7 @@ PROC = ROOT / "data" / "processed"
 WINDOW = 10            # "recent form" window, in games
 MIN_GAMES = 10         # both teams must have played this many games this season
 
-# Elo settings (FiveThirtyEight-style)
+# Elo settings (see https://en.wikipedia.org/wiki/Elo_rating_system)
 ELO_START, ELO_MEAN, ELO_K, ELO_HOME, ELO_CARRY = 1500.0, 1505.0, 20.0, 100.0, 0.75
 
 
