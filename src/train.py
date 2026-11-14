@@ -75,8 +75,8 @@ def tune(name, make, grid, train):
     best = min(scores, key=lambda t: t[0])[1]
     return best, rows
 
- """This one compute the test metrics from true results (y) and predicted home-win chances (prob)."""
 def evaluate(y, prob):
+    """Compute the test metrics from true results (y) and predicted home-win chances (prob)."""
     pred = (prob >= 0.5).astype(int)
     acc = accuracy_score(y, pred)
     half = 1.96 * np.sqrt(acc * (1 - acc) / len(y))
@@ -109,7 +109,7 @@ def main() -> None:
     test["P_LR"] = lr.predict_proba(test[FEATURES])[:, 1]
     test["P_RF"] = rf.predict_proba(test[FEATURES])[:, 1]
 
-    # ---- baselines ---------------------------------------------------------
+    # ---- baselines ------------------------------------------------------
     test["P_HOME"] = 1.0
     better = np.sign(test.DIFF_SEASON_WIN_PCT)
     test["P_RECORD"] = np.where(better == 0, 1.0, (better > 0).astype(float))
@@ -154,7 +154,7 @@ def main() -> None:
     per_season.to_csv(RES / "per_season_test.csv")
     print(per_season.round(3))
 
-    #home court advantage
+    #home court advantage (Basically, the home team wins more than 50% of the time, but the bubble games are different)
     allg["GROUP"] = np.where(allg.BUBBLE == 1, "2019-20 bubble", allg.SEASON_YEAR)
     home_court = allg.groupby("GROUP").agg(games=(TARGET, "size"), home_win_rate=(TARGET, "mean"),
                                            avg_home_margin=("HOME_PTS", "mean"))
@@ -163,7 +163,7 @@ def main() -> None:
     home_court.to_csv(RES / "home_court_by_season.csv")
     print(home_court.round(3))
 
-    # ---- feature importance --------------------------------------------------
+    # ---- feature importance By random forest and logistic regression 
     coefs = pd.Series(lr[-1].coef_[0], index=FEATURES)
     perm = permutation_importance(rf, test[FEATURES], y, scoring="neg_log_loss",
                                   n_repeats=10, random_state=SEED, n_jobs=-1)
@@ -194,7 +194,7 @@ def main() -> None:
           "AWAY_TEAM_ABBREVIATION", TARGET, "BUBBLE", "P_ELO", "P_LR", "P_RF"]].to_csv(
         RES / "test_predictions.csv", index=False)
 
-    # ---- figures ---------------------------------------------------------------
+    # ---- figures By season accuracy, home-court advantage, feature importance, calibration
     order = list(models)[::-1]
     accs = [metrics[k]["accuracy"] for k in order]
     fig, ax = plt.subplots(figsize=(8, 3.6))
