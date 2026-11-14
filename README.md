@@ -41,7 +41,7 @@ Runs in about 2 minutes on a laptop (`train.py` does the hyperparameter search).
 | `features.py` | Builds 19 pre-game features: home-minus-away Elo, season win % and net rating, last-10-game form (win %, margin, offensive/defensive/net rating, pace, four factors), rest days, games in the last 7 days, back-to-backs. Every rolling stat is shifted one game so a game never sees its own result. |
 | `train.py` | Train on 2010-11 to 2018-19, test on 2019-20 to 2023-24. Tunes hyperparameters with forward-chaining validation (validate on 2016-17, 2017-18, 2018-19). Reports accuracy, log loss, Brier score and AUC against three baselines, per-season results, home-court rates, permutation feature importance and an ablation. |
 
-## Preliminary results (test seasons 2019-20 to 2023-24, 5,050 games)
+## Results (test seasons 2019-20 to 2023-24, 5,050 games)
 
 | Model | Accuracy | Log loss | AUC |
 | --- | --- | --- | --- |
